@@ -1,0 +1,4 @@
+<resources>
+    <string name="gql_name">FakeResponse</string>
+    <string name="gql_save">Save</string>
+</resources>

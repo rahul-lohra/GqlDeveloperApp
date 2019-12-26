@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rahullohra.fakeresponse">
+
+    <application
+        android:name="com.rahullohra.fakeresponse.App">
+        <activity android:name="com.rahullohra.fakeresponse.presentaiton.activities.AddGqlActivity"></activity>
+        <activity android:name="com.rahullohra.fakeresponse.presentaiton.activities.FakeResponseActivity" />
+    </application>
+
+</manifest>
