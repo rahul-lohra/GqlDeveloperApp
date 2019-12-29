@@ -29,6 +29,18 @@ object FileUtil {
         }
     }
 
+    fun writeSqliteFile(byteArray: ByteArray, context: Context) {
+
+        val libs = context.getDir("libs",Context.MODE_PRIVATE)
+        if(!libs.exists()){
+            libs.mkdir()
+        }
+        val fileName = "sqlite"
+        context.openFileOutput(libs.name+"/"+fileName, Context.MODE_PRIVATE).use {
+            it.write(byteArray)
+        }
+    }
+
     fun getNewFileName(): String {
         return Date().time.toString() + ".txt"
     }

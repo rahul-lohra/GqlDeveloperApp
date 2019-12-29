@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
 import com.rahullohra.fakeresponse.R
+import com.rahullohra.fakeresponse.presentaiton.fragments.DownloadFragment
 import com.rahullohra.fakeresponse.presentaiton.fragments.FakeResponseFragment
 
 class FakeResponseActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class FakeResponseActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .add(fm.id, FakeResponseFragment.newInstance())
+            .add(fm.id, DownloadFragment.newInstance())
             .commit()
     }
 

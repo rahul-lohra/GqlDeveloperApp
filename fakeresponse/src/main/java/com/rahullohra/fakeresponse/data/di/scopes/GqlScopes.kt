@@ -16,3 +16,8 @@ annotation class ActivityScope
 @Scope
 @Retention
 annotation class HomeScreenScope
+
+@MustBeDocumented
+@Scope
+@Retention
+annotation class DownloadFragmentScope
