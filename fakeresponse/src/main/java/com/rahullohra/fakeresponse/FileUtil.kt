@@ -8,6 +8,9 @@ import java.util.*
 object FileUtil {
 
     const val PARENT = "responses"
+    const val GQL_FOLDER = "gqlLibs"
+    const val SQLITE_FILE = "sqlite3"
+
     fun createParent(): File {
         val parent = File(PARENT)
         if (!parent.exists()) {
@@ -32,11 +35,11 @@ object FileUtil {
 
     fun writeSqliteFile(byteArray: ByteArray, context: Context) {
 
-        val libs = context.getDir("gqlLibs", Context.MODE_PRIVATE)
+        val libs = context.getDir(GQL_FOLDER, Context.MODE_PRIVATE)
         if (!libs.exists()) {
             libs.mkdir()
         }
-        val fileName = "sqlite3"
+        val fileName = SQLITE_FILE
         val file = File(libs, fileName)
         if (file.exists()) {
             file.delete()

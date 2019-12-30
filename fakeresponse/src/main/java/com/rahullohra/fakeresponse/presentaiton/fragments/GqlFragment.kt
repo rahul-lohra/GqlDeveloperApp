@@ -23,6 +23,12 @@ class GqlFragment : BaseFragment() {
     val STATE_EMPTY = 0
     val STATE_DATA = 1
 
+    companion object{
+        fun newInstance():GqlFragment{
+            return GqlFragment()
+        }
+    }
+
     lateinit var rv: RecyclerView
     lateinit var viewFlipper: ViewFlipper
 

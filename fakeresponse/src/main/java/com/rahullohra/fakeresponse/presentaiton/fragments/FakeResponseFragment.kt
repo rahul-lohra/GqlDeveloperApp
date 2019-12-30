@@ -3,20 +3,12 @@ package com.rahullohra.fakeresponse.presentaiton.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
-import com.rahullohra.fakeresponse.App
 import com.rahullohra.fakeresponse.R
 import com.rahullohra.fakeresponse.Router
-import com.rahullohra.fakeresponse.data.di.component.DaggerHomeScreenComponent
 import com.rahullohra.fakeresponse.presentaiton.adapters.PagerAdapter
-import com.rahullohra.fakeresponse.presentaiton.livedata.Fail
-import com.rahullohra.fakeresponse.presentaiton.livedata.Loading
-import com.rahullohra.fakeresponse.presentaiton.livedata.Success
-import com.rahullohra.fakeresponse.presentaiton.viewmodels.FakeResponseModel
-import javax.inject.Inject
 
 class FakeResponseFragment : BaseFragment() {
 
@@ -53,7 +45,6 @@ class FakeResponseFragment : BaseFragment() {
             Router.routeToAddGql(context)
         }
     }
-
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

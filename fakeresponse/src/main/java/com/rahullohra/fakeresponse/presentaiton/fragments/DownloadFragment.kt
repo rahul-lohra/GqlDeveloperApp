@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.rahullohra.fakeresponse.App
 import com.rahullohra.fakeresponse.R
 import com.rahullohra.fakeresponse.data.di.component.DaggerDownloadFragmentComponent
+import com.rahullohra.fakeresponse.presentaiton.activities.FakeResponseActivity
 import com.rahullohra.fakeresponse.presentaiton.livedata.Fail
 import com.rahullohra.fakeresponse.presentaiton.livedata.Loading
 import com.rahullohra.fakeresponse.presentaiton.livedata.Success
@@ -43,6 +44,7 @@ class DownloadFragment : BaseFragment() {
                 is Success -> {
                     tvStatus.text = "Download Success"
                     btnRetry.isEnabled = false
+                    handleOnDownloadSuccess()
                 }
                 is Fail -> {
                     btnRetry.isEnabled = true
@@ -50,6 +52,12 @@ class DownloadFragment : BaseFragment() {
                 }
             }
         })
+    }
+
+    fun handleOnDownloadSuccess(){
+        if(context is FakeResponseActivity){
+            (context as FakeResponseActivity).onSqlFilesArePresent()
+        }
     }
 
     fun getData() {
