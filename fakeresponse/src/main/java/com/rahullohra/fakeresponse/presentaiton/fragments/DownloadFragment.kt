@@ -46,7 +46,7 @@ class DownloadFragment : BaseFragment() {
                 }
                 is Fail -> {
                     btnRetry.isEnabled = true
-                    tvStatus.text = "Download Fail"
+                    tvStatus.text = "Download Fail: ${it.ex.message}"
                 }
             }
         })

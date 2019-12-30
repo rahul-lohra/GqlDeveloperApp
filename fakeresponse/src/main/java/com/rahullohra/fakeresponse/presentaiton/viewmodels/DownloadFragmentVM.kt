@@ -1,6 +1,5 @@
 package com.rahullohra.fakeresponse.presentaiton.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rahullohra.fakeresponse.data.di.modules.DispatcherModule
@@ -36,7 +35,6 @@ class DownloadFragmentVM @Inject constructor(
             liveData.postValue(Loading())
             usecase.getSqlite()
             liveData.postValue(Success(true))
-            Log.d("NOOB","File downloaded")
         }
     }
 }

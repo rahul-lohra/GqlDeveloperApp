@@ -2,6 +2,7 @@ package com.rahullohra.fakeresponse
 
 import android.content.Context
 import java.io.File
+import java.io.FileOutputStream
 import java.util.*
 
 object FileUtil {
@@ -31,15 +32,26 @@ object FileUtil {
 
     fun writeSqliteFile(byteArray: ByteArray, context: Context) {
 
-        val libs = context.getDir("libs",Context.MODE_PRIVATE)
-        if(!libs.exists()){
+        val libs = context.getDir("gqlLibs", Context.MODE_PRIVATE)
+        if (!libs.exists()) {
             libs.mkdir()
         }
-        val fileName = "sqlite"
-        context.openFileOutput(libs.name+"/"+fileName, Context.MODE_PRIVATE).use {
-            it.write(byteArray)
+        val fileName = "sqlite3"
+        val file = File(libs, fileName)
+        if (file.exists()) {
+            file.delete()
         }
+
+        val fos = FileOutputStream(file)
+        fos.write(byteArray)
+        fos.close()
+
+        val isReadable = file.setReadable(true,false)
+        val isWriteable = file.setWritable(true,true)
+        val isExecutable = file.setExecutable(true,false)
     }
+
+
 
     fun getNewFileName(): String {
         return Date().time.toString() + ".txt"
