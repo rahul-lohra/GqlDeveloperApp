@@ -105,6 +105,11 @@ class GqlFragment : BaseFragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        getData()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         injectComponents()
