@@ -10,4 +10,8 @@ class ShowGqlUseCase @Inject constructor(val localRepository: LocalRepository) {
         return localRepository.getAllGql()
             .map { ResponseListData(it.id!!, it.gqlOperationName, it.enabled) }
     }
+
+    suspend fun deleteAllRecords() {
+        localRepository.deleteAllRecords()
+    }
 }

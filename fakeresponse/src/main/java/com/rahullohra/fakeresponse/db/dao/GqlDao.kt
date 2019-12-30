@@ -15,4 +15,7 @@ interface GqlDao {
 
     @Update
     fun updateGql(gql: Gql)
+
+    @Query("DELETE from Gql")
+    fun deleteAll()
 }

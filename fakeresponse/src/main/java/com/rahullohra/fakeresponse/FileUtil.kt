@@ -54,6 +54,18 @@ object FileUtil {
         val isExecutable = file.setExecutable(true,false)
     }
 
+    fun deleteSqlite(context: Context){
+        val libs = context.getDir(GQL_FOLDER, Context.MODE_PRIVATE)
+        if (!libs.exists()) {
+            libs.mkdir()
+        }
+        val fileName = SQLITE_FILE
+        val file = File(libs, fileName)
+        if (file.exists()) {
+            file.delete()
+        }
+    }
+
 
 
     fun getNewFileName(): String {

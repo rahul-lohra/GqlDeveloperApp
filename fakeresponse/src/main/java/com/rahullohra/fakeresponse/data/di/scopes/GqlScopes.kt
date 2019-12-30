@@ -21,3 +21,8 @@ annotation class HomeScreenScope
 @Scope
 @Retention
 annotation class DownloadFragmentScope
+
+@MustBeDocumented
+@Scope
+@Retention
+annotation class FakeResponseFragmentScope

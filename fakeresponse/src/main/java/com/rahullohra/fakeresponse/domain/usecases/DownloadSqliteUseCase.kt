@@ -28,6 +28,10 @@ class DownloadSqliteUseCase @Inject constructor(val repository: RemoteSqliteRepo
         return false
     }
 
+    fun deleteSqlite(){
+        FileUtil.deleteSqlite(App.INSTANCE)
+    }
+
 
     fun writeSqliteResponseToFile(byteArray: ByteArray) {
         FileUtil.writeSqliteFile(byteArray, App.INSTANCE)

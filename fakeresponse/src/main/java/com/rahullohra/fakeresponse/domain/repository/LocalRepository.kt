@@ -13,4 +13,8 @@ class LocalRepository @Inject constructor(val dao: GqlDao) {
     suspend fun getAllGql(): List<Gql> {
         return dao.getAll()
     }
+
+    suspend fun deleteAllRecords(){
+        return dao.deleteAll()
+    }
 }
