@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.rahullohra.fakeresponse.ResponseListData
 import com.rahullohra.fakeresponse.data.di.modules.DispatcherModule
 import com.rahullohra.fakeresponse.domain.usecases.ShowGqlUseCase
+import com.rahullohra.fakeresponse.domain.usecases.UpdateGqlUseCase
 import com.rahullohra.fakeresponse.presentaiton.livedata.Fail
 import com.rahullohra.fakeresponse.presentaiton.livedata.LiveDataResult
 import com.rahullohra.fakeresponse.presentaiton.livedata.Success
@@ -19,10 +20,13 @@ import kotlin.coroutines.CoroutineContext
 class FakeResponseModel @Inject constructor(
     @Named(DispatcherModule.WORKER)
     val workerDispatcher: CoroutineDispatcher,
-    val showGqlUseCase: ShowGqlUseCase
+    val showGqlUseCase: ShowGqlUseCase,
+    val updateGqlUseCase: UpdateGqlUseCase
+
 ) : ViewModel(), CoroutineScope {
 
     val liveData = MutableLiveData<LiveDataResult<List<ResponseListData>>>()
+    val toggleLiveData = MutableLiveData<LiveDataResult<Pair<Int,Boolean>>>()
 
     override val coroutineContext: CoroutineContext
         get() = workerDispatcher + ceh
@@ -30,6 +34,20 @@ class FakeResponseModel @Inject constructor(
     private val ceh = CoroutineExceptionHandler { _, ex ->
         liveData.postValue(Fail(ex))
         ex.printStackTrace()
+    }
+
+    fun toggleGql(id: Int, isEnabled: Boolean) {
+        if(true)return
+        launch {
+            try {
+                updateGqlUseCase.toggleGql(id, isEnabled)
+                toggleLiveData.postValue(Success(Pair(id, isEnabled)))
+            } catch (ex: Exception) {
+                toggleLiveData.postValue(Fail(ex))
+                toggleLiveData.postValue(Success(Pair(id, !isEnabled)))
+            }
+        }
+
     }
 
     fun getGql() {

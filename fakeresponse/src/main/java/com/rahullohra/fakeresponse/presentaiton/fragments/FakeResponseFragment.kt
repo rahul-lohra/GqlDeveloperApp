@@ -57,6 +57,7 @@ class FakeResponseFragment : BaseFragment() {
         viewPager = view.findViewById(R.id.viewPager)
         tabLayout = view.findViewById(R.id.tabLayout)
         fab = view.findViewById(R.id.fab)
+        tabLayout.visibility = View.GONE
     }
 
     override fun setupFragment() {

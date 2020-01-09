@@ -16,6 +16,9 @@ interface GqlDao {
     @Update
     fun updateGql(fakeGql: FakeGql)
 
+    @Query("Update FakeGql SET enabled =:isEnabled where id = :gqlId")
+    fun toggleGql(gqlId: Int, isEnabled: Boolean)
+
     @Query("DELETE from FakeGql")
     fun deleteAll()
 }
