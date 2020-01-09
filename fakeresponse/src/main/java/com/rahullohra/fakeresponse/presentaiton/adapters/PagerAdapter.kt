@@ -27,6 +27,6 @@ class PagerAdapter : FragmentStatePagerAdapter {
         return tabTitles[position]
     }
 
-    override fun getCount() = 2
+    override fun getCount() = 1
 
 }

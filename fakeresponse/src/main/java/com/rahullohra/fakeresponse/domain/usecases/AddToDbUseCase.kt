@@ -1,47 +1,52 @@
 package com.rahullohra.fakeresponse.domain.usecases
 
 import android.text.TextUtils
-import com.rahullohra.fakeresponse.App
-import com.rahullohra.fakeresponse.FileUtil
+import com.rahullohra.fakeresponse.data.models.Either
 import com.rahullohra.fakeresponse.db.entities.FakeGql
 import com.rahullohra.fakeresponse.domain.repository.LocalRepository
 import com.rahullohra.fakeresponse.presentaiton.viewmodels.data.AddGqlData
-import java.io.File
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 import java.util.*
 import javax.inject.Inject
 
+
 class AddToDbUseCase @Inject constructor(val repository: LocalRepository) {
 
-    suspend fun getFileName(prefix: String): File {
-        return FileUtil.createFile(prefix)
-    }
-
     suspend fun addToDb(data: AddGqlData): Long {
-        var filePrefix: String? = data.gqlQueryName
-        if (TextUtils.isEmpty(filePrefix)) {
-            filePrefix = data.customTag
-        }
-        if (TextUtils.isEmpty(filePrefix)) throw NoGqlNameException()
+        if (TextUtils.isEmpty(data.gqlQueryName)) throw NoGqlNameException()
         if (TextUtils.isEmpty(data.response)) throw NoResponseException()
-
-        writeResponseToFile(data.response!!, filePrefix!!)
-        return repository.addToDb(gqlDataToGql(data))
+        val either = isJSONValid(data.response!!)
+        return when(either){
+            is Either.Left -> throw either.a
+            else -> repository.addToDb(gqlDataToGql(data))
+        }
     }
 
-    suspend fun writeResponseToFile(response: String, filePrefix: String) {
-        FileUtil.writeToFile(response, filePrefix, App.INSTANCE)
+    private fun isJSONValid(test: String): Either<java.lang.Exception, Boolean> {
+        try {
+            JSONObject(test)
+        } catch (ex: JSONException) {
+            JSONArray(test)
+        } catch (ex1: JSONException) {
+            return Either.Left(ex1)
+        }
+        return Either.Right(true)
     }
+
 
     protected fun gqlDataToGql(data: AddGqlData): FakeGql {
         val date = Date()
 
         val gql = FakeGql(
             gqlOperationName = data.gqlQueryName!!,
-            javaQueryName = data.javaQueryName!!,
+            javaQueryName = data.javaQueryName,
             createdAt = date.time,
             updatedAt = date.time,
             enabled = false,
-            customTag = data.customTag
+            customTag = data.customTag,
+            response = data.response!!
 
         )
         return gql

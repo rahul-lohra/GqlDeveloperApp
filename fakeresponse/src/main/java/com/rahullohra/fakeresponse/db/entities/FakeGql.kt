@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "FakeGql")
 data class FakeGql(
-    @PrimaryKey(autoGenerate = true) var id: Int? = 0,
+    @PrimaryKey(autoGenerate = true) var id: Int? = null,
     val response: String? = null,
     val createdAt: Long,
     val updatedAt: Long,
