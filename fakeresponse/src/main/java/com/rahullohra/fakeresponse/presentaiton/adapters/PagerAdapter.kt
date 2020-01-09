@@ -15,7 +15,7 @@ class PagerAdapter : FragmentStatePagerAdapter {
         fragmentList.add(GqlFragment())
         fragmentList.add(GqlFragment())
         
-        tabTitles.add("Gql")
+        tabTitles.add("FakeGql")
         tabTitles.add("Custom")
     }
 

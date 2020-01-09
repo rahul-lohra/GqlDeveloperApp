@@ -3,7 +3,7 @@ package com.rahullohra.fakeresponse.domain.usecases
 import android.text.TextUtils
 import com.rahullohra.fakeresponse.App
 import com.rahullohra.fakeresponse.FileUtil
-import com.rahullohra.fakeresponse.db.entities.Gql
+import com.rahullohra.fakeresponse.db.entities.FakeGql
 import com.rahullohra.fakeresponse.domain.repository.LocalRepository
 import com.rahullohra.fakeresponse.presentaiton.viewmodels.data.AddGqlData
 import java.io.File
@@ -17,9 +17,9 @@ class AddToDbUseCase @Inject constructor(val repository: LocalRepository) {
     }
 
     suspend fun addToDb(data: AddGqlData): Long {
-        var filePrefix: String? = data.queryName
+        var filePrefix: String? = data.gqlQueryName
         if (TextUtils.isEmpty(filePrefix)) {
-            filePrefix = data.customName
+            filePrefix = data.customTag
         }
         if (TextUtils.isEmpty(filePrefix)) throw NoGqlNameException()
         if (TextUtils.isEmpty(data.response)) throw NoResponseException()
@@ -32,15 +32,17 @@ class AddToDbUseCase @Inject constructor(val repository: LocalRepository) {
         FileUtil.writeToFile(response, filePrefix, App.INSTANCE)
     }
 
-    protected fun gqlDataToGql(data: AddGqlData): Gql {
+    protected fun gqlDataToGql(data: AddGqlData): FakeGql {
         val date = Date()
 
-        val gql = Gql(
-            gqlOperationName = data.queryName!!,
-            javaQueryName = data.customName!!,
+        val gql = FakeGql(
+            gqlOperationName = data.gqlQueryName!!,
+            javaQueryName = data.javaQueryName!!,
             createdAt = date.time,
             updatedAt = date.time,
-            enabled = false
+            enabled = false,
+            customTag = data.customTag
+
         )
         return gql
     }

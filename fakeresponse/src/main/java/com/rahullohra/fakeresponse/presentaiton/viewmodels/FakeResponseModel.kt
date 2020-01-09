@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rahullohra.fakeresponse.ResponseListData
 import com.rahullohra.fakeresponse.data.di.modules.DispatcherModule
-import com.rahullohra.fakeresponse.db.entities.Gql
 import com.rahullohra.fakeresponse.domain.usecases.ShowGqlUseCase
 import com.rahullohra.fakeresponse.presentaiton.livedata.Fail
 import com.rahullohra.fakeresponse.presentaiton.livedata.LiveDataResult

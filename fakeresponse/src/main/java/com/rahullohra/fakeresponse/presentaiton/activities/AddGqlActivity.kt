@@ -84,7 +84,7 @@ class AddGqlActivity : BaseActivity() {
         val gqlName = etGqlName.text.toString()
         val response = etResponse.text.toString()
 
-        val addGqlData = AddGqlData(gqlName, customName, response)
+        val addGqlData = AddGqlData(gqlQueryName = gqlName, response = response, customTag = customName)
         viewModel.addToDb(addGqlData)
     }
 }
