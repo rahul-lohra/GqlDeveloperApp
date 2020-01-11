@@ -46,9 +46,10 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 
-
     implementation "com.google.dagger:dagger-android:$dagger"
     kapt "com.google.dagger:dagger-compiler:$dagger"
+
+    implementation "com.squareup.okhttp3:okhttp:4.3.1"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
