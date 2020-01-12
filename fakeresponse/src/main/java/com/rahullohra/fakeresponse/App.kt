@@ -5,7 +5,7 @@ import com.rahullohra.fakeresponse.data.di.component.AppComponent
 import com.rahullohra.fakeresponse.data.di.component.DaggerAppComponent
 import com.rahullohra.fakeresponse.data.di.modules.AppContextModule
 
-class App : Application() {
+open class App : Application() {
 
     lateinit var appComponent: AppComponent
 

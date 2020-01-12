@@ -35,18 +35,18 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.5'
     kapt 'com.google.dagger:dagger-compiler:2.5'
 
-    implementation ('com.rahullohra.fakeresponse:fakeresponse:0.0.3'){
-        exclude group: 'com.google.dagger'
-        exclude group: 'androidx.test.ext'
-        exclude group: 'androidx.test.espresso'
-        exclude group: 'androidx.room'
-        exclude group: 'com.google.android.material'
-        exclude group: 'androidx.recyclerview'
-        exclude group: 'androidx.lifecycle'
-        exclude group: 'androidx.legacy'
-        exclude group: 'androidx.constraintlayout'
-        exclude group: 'androidx.core'
-        exclude group: 'androidx.appcompat'
-        exclude group: 'org.jetbrains.kotlin'
+    implementation ('com.rahullohra.fakeresponse:fakeresponse:0.0.3@aar'){
+//        exclude group: 'com.google.dagger'
+//        exclude group: 'androidx.test.ext'
+//        exclude group: 'androidx.test.espresso'
+//        exclude group: 'androidx.room'
+//        exclude group: 'com.google.android.material'
+//        exclude group: 'androidx.recyclerview'
+//        exclude group: 'androidx.lifecycle'
+//        exclude group: 'androidx.legacy'
+//        exclude group: 'androidx.constraintlayout'
+//        exclude group: 'androidx.core'
+//        exclude group: 'androidx.appcompat'
+//        exclude group: 'org.jetbrains.kotlin'
     }
 }
