@@ -12,7 +12,7 @@ ext {
     //Artifact information
     publishedGroupId = 'com.rahullohra.fakeresponse'
     artifact = 'fakeResponse'
-    libraryVersion = '0.0.4'
+    libraryVersion = '0.0.5'
 
     libraryDescription = 'An android library to provide fake api response'
     siteUrl = 'https://github.com/rahul-lohra/GqlDeveloperApp'

@@ -10,7 +10,7 @@ class PagerAdapter : FragmentStatePagerAdapter {
     val fragmentList :ArrayList<Fragment> = arrayListOf()
     val tabTitles :ArrayList<String> = arrayListOf()
 
-    constructor(fm: FragmentManager, behaviour: Int) : super(fm, behaviour) {
+    constructor(fm: FragmentManager) : super(fm) {
 
         fragmentList.add(GqlFragment())
         fragmentList.add(GqlFragment())

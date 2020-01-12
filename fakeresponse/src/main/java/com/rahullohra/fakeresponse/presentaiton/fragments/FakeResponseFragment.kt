@@ -41,10 +41,7 @@ class FakeResponseFragment : BaseFragment() {
     }
 
     override fun initVars() {
-        pagerAdapter = PagerAdapter(
-            childFragmentManager,
-            FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-        )
+        pagerAdapter = PagerAdapter(childFragmentManager)
     }
 
     override fun initViews(view: View) {

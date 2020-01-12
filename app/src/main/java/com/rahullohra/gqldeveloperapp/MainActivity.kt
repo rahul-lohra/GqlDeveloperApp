@@ -13,5 +13,8 @@ class MainActivity : AppCompatActivity() {
 
         startActivity(Intent(this, FakeResponseActivity::class.java))
         finish()
+
+        RvAdapter()
+        RoundTextView(this)
     }
 }
