@@ -6,7 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -14,10 +14,12 @@ import com.google.android.material.tabs.TabLayout
 import com.rahullohra.fakeresponse.R
 import com.rahullohra.fakeresponse.Router
 import com.rahullohra.fakeresponse.data.diProvider.fragments.FakeResponseFragmentProvider
+import com.rahullohra.fakeresponse.presentaiton.activities.BaseActivity
 import com.rahullohra.fakeresponse.presentaiton.activities.FakeResponseActivity
 import com.rahullohra.fakeresponse.presentaiton.adapters.PagerAdapter
 import com.rahullohra.fakeresponse.presentaiton.livedata.Success
 import com.rahullohra.fakeresponse.presentaiton.viewmodels.FakeResponseVM
+
 
 class FakeResponseFragment : BaseFragment() {
 
@@ -28,6 +30,7 @@ class FakeResponseFragment : BaseFragment() {
     lateinit var viewPager: ViewPager
     lateinit var tabLayout: TabLayout
     lateinit var fab: FloatingActionButton
+    lateinit var toolbar: Toolbar
 
     private lateinit var pagerAdapter: PagerAdapter
     lateinit var viewModel: FakeResponseVM
@@ -45,6 +48,7 @@ class FakeResponseFragment : BaseFragment() {
     }
 
     override fun initViews(view: View) {
+        toolbar = view.findViewById(R.id.toolbar)
         viewPager = view.findViewById(R.id.viewPager)
         tabLayout = view.findViewById(R.id.tabLayout)
         fab = view.findViewById(R.id.fab)
@@ -55,6 +59,8 @@ class FakeResponseFragment : BaseFragment() {
         inijectComponents()
         setListeners()
         viewPager.adapter = pagerAdapter
+
+        (activity as BaseActivity).setSupportActionBar(toolbar)
     }
 
     fun setListeners() {
