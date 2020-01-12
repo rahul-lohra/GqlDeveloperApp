@@ -2,11 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rahullohra.fakeresponse">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <application
-        android:name="com.rahullohra.fakeresponse.App"
-        android:usesCleartextTraffic="false">
-        <activity android:name="com.rahullohra.fakeresponse.presentaiton.activities.AddGqlActivity"/>
+    <application android:name="com.rahullohra.fakeresponse.App">
+        <activity android:name="com.rahullohra.fakeresponse.presentaiton.activities.AddGqlActivity" />
         <activity android:name="com.rahullohra.fakeresponse.presentaiton.activities.FakeResponseActivity" />
     </application>
 

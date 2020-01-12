@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -33,6 +32,21 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-//    implementation project(path: ':fakeresponse')
-    implementation 'com.rahullohra.fakeresponse:fakeresponse:0.0.1'
+    implementation 'com.google.dagger:dagger:2.5'
+    kapt 'com.google.dagger:dagger-compiler:2.5'
+
+    implementation ('com.rahullohra.fakeresponse:fakeresponse:0.0.3'){
+        exclude group: 'com.google.dagger'
+        exclude group: 'androidx.test.ext'
+        exclude group: 'androidx.test.espresso'
+        exclude group: 'androidx.room'
+        exclude group: 'com.google.android.material'
+        exclude group: 'androidx.recyclerview'
+        exclude group: 'androidx.lifecycle'
+        exclude group: 'androidx.legacy'
+        exclude group: 'androidx.constraintlayout'
+        exclude group: 'androidx.core'
+        exclude group: 'androidx.appcompat'
+        exclude group: 'org.jetbrains.kotlin'
+    }
 }

@@ -1,4 +1,4 @@
-package com.rahullohra.fakeresponse
+package com.rahullohra.fakeresponse.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Request
