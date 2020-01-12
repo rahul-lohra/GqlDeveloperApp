@@ -1,24 +1,18 @@
 package com.rahullohra.fakeresponse.presentaiton.fragments
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.rahullohra.fakeresponse.App
 import com.rahullohra.fakeresponse.R
-import com.rahullohra.fakeresponse.data.di.component.DaggerDownloadFragmentComponent
+import com.rahullohra.fakeresponse.data.diProvider.fragments.DownloadFragmentProvider
 import com.rahullohra.fakeresponse.presentaiton.activities.FakeResponseActivity
 import com.rahullohra.fakeresponse.presentaiton.livedata.Fail
 import com.rahullohra.fakeresponse.presentaiton.livedata.Loading
 import com.rahullohra.fakeresponse.presentaiton.livedata.Success
 import com.rahullohra.fakeresponse.presentaiton.viewmodels.DownloadFragmentVM
-import com.rahullohra.fakeresponse.presentaiton.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.gql_fragment_download.*
-import javax.inject.Inject
 
 class DownloadFragment : BaseFragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
-    var viewModel: DownloadFragmentVM? = null
+    lateinit var viewModel: DownloadFragmentVM
 
     companion object {
         fun newInstance(): DownloadFragment {
@@ -35,7 +29,7 @@ class DownloadFragment : BaseFragment() {
     }
 
     fun setListeners() {
-        viewModel?.liveData?.observe(viewLifecycleOwner, Observer {
+        viewModel.liveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Loading -> {
                     tvStatus.text = "Downloading.."
@@ -54,25 +48,18 @@ class DownloadFragment : BaseFragment() {
         })
     }
 
-    fun handleOnDownloadSuccess(){
-        if(context is FakeResponseActivity){
+    fun handleOnDownloadSuccess() {
+        if (context is FakeResponseActivity) {
             (context as FakeResponseActivity).onSqlFilesArePresent()
         }
     }
 
     fun getData() {
-        viewModel?.downloadSqliteFiles()
+        viewModel.downloadSqliteFiles()
     }
 
     fun injectComponents() {
-        if (viewModel == null) {
-            val appComponent = (context?.applicationContext as App).appComponent
-            DaggerDownloadFragmentComponent.builder()
-                .appComponent(appComponent)
-                .build().inject(this)
-            viewModel =
-                ViewModelProviders.of(this, viewModelFactory)[DownloadFragmentVM::class.java]
-        }
+        DownloadFragmentProvider().inject(this)
     }
 
 

@@ -5,9 +5,9 @@ import android.os.Build
 import com.rahullohra.fakeresponse.App
 import com.rahullohra.fakeresponse.FileUtil
 import com.rahullohra.fakeresponse.domain.repository.RemoteSqliteRepository
-import javax.inject.Inject
 
-class DownloadSqliteUseCase @Inject constructor(val repository: RemoteSqliteRepository) {
+class DownloadSqliteUseCase(val repository: RemoteSqliteRepository) :
+    BaseUseCase<RemoteSqliteRepository>(repository) {
 
     suspend fun getSqlite() {
         val isFilePresent = checkForExsistingSqliteFile()
@@ -28,7 +28,7 @@ class DownloadSqliteUseCase @Inject constructor(val repository: RemoteSqliteRepo
         return false
     }
 
-    fun deleteSqlite(){
+    fun deleteSqlite() {
         FileUtil.deleteSqlite(App.INSTANCE)
     }
 

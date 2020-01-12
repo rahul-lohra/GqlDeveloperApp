@@ -9,16 +9,15 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
-import javax.inject.Inject
 
 
-class AddToDbUseCase @Inject constructor(val repository: LocalRepository) {
+class AddToDbUseCase(val repository: LocalRepository) : BaseUseCase<LocalRepository>(repository) {
 
     suspend fun addToDb(data: AddGqlData): Long {
         if (TextUtils.isEmpty(data.gqlQueryName)) throw NoGqlNameException()
         if (TextUtils.isEmpty(data.response)) throw NoResponseException()
         val either = isJSONValid(data.response!!)
-        return when(either){
+        return when (either) {
             is Either.Left -> throw either.a
             else -> repository.addToDb(gqlDataToGql(data))
         }

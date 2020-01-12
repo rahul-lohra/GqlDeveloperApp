@@ -1,26 +1,21 @@
 package com.rahullohra.fakeresponse.presentaiton.fragments
 
 import android.os.Bundle
-import android.util.SparseArray
 import android.view.View
 import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rahullohra.fakeresponse.App
 import com.rahullohra.fakeresponse.R
 import com.rahullohra.fakeresponse.ResponseListData
-import com.rahullohra.fakeresponse.data.di.component.DaggerHomeScreenComponent
+import com.rahullohra.fakeresponse.data.diProvider.fragments.GqlFragmentProvider
 import com.rahullohra.fakeresponse.presentaiton.adapters.GqlRvAdapter
 import com.rahullohra.fakeresponse.presentaiton.livedata.Fail
 import com.rahullohra.fakeresponse.presentaiton.livedata.Loading
 import com.rahullohra.fakeresponse.presentaiton.livedata.Success
 import com.rahullohra.fakeresponse.presentaiton.viewmodels.FakeResponseModel
-import com.rahullohra.fakeresponse.presentaiton.viewmodels.ViewModelFactory
-import javax.inject.Inject
 
 
 class GqlFragment : BaseFragment() {
@@ -40,17 +35,14 @@ class GqlFragment : BaseFragment() {
     lateinit var dataList: ArrayList<ResponseListData>
     lateinit var mapOfData: MutableMap<Int, ResponseListData>
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    var viewModel: FakeResponseModel? = null
+    lateinit var viewModel: FakeResponseModel
 
     override fun getLayout() = R.layout.fragment_gql
 
     override fun initVars() {
         dataList = ArrayList()
         adapter = GqlRvAdapter(dataList, itemClickCallback = { gqlId, isChecked ->
-            viewModel?.toggleGql(gqlId, isChecked)
+            viewModel.toggleGql(gqlId, isChecked)
         })
     }
 
@@ -72,7 +64,7 @@ class GqlFragment : BaseFragment() {
     }
 
     fun setListeners() {
-        viewModel!!.liveData.observe(viewLifecycleOwner, Observer { it ->
+        viewModel.liveData.observe(viewLifecycleOwner, Observer { it ->
             when (it) {
                 is Success -> {
                     if (it.data.isNotEmpty()) {
@@ -94,7 +86,7 @@ class GqlFragment : BaseFragment() {
             }
         })
 
-        viewModel!!.toggleLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.toggleLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Success -> toggleGql(it.data.first, it.data.second)
                 is Fail -> showErrorToggle()
@@ -102,7 +94,7 @@ class GqlFragment : BaseFragment() {
         })
     }
 
-    fun toggleGql(id:Int, enable:Boolean){
+    fun toggleGql(id: Int, enable: Boolean) {
         mapOfData[id]?.isChecked = enable
         adapter.notifyDataSetChanged()
     }
@@ -120,17 +112,11 @@ class GqlFragment : BaseFragment() {
     }
 
     private fun getData() {
-        viewModel?.getGql()
+        viewModel.getGql()
     }
 
     private fun injectComponents() {
-        if (viewModel == null) {
-            val appComponent = (context?.applicationContext as App).appComponent
-            DaggerHomeScreenComponent.builder()
-                .appComponent(appComponent)
-                .build().inject(this)
-            viewModel = ViewModelProviders.of(this, viewModelFactory)[FakeResponseModel::class.java]
-        }
+        GqlFragmentProvider().inject(this)
     }
 
     override fun onResume() {

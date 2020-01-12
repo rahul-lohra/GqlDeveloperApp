@@ -2,7 +2,6 @@ package com.rahullohra.fakeresponse.presentaiton.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rahullohra.fakeresponse.data.di.modules.DispatcherModule
 import com.rahullohra.fakeresponse.domain.usecases.DownloadSqliteUseCase
 import com.rahullohra.fakeresponse.domain.usecases.ShowGqlUseCase
 import com.rahullohra.fakeresponse.presentaiton.livedata.Fail
@@ -10,12 +9,9 @@ import com.rahullohra.fakeresponse.presentaiton.livedata.LiveDataResult
 import com.rahullohra.fakeresponse.presentaiton.livedata.Success
 import kotlinx.coroutines.*
 import java.lang.Exception
-import javax.inject.Inject
-import javax.inject.Named
 import kotlin.coroutines.CoroutineContext
 
-class FakeResponseVM @Inject constructor(
-    @Named(DispatcherModule.WORKER)
+class FakeResponseVM constructor(
     val workerDispatcher: CoroutineDispatcher,
     val usecase: ShowGqlUseCase,
     val sqliteUseCase: DownloadSqliteUseCase

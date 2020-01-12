@@ -35,7 +35,13 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.5'
     kapt 'com.google.dagger:dagger-compiler:2.5'
 
-    implementation ('com.rahullohra.fakeresponse:fakeresponse:0.0.3@aar'){
+        implementation project(path: ':fakeresponse')
+//    implementation ('com.rahullohra.fakeresponse:fakeresponse:0.0.4@aar'){
+//        transitive = true
+//    }
+
+//    implementation ('com.rahullohra.fakeresponse:fakeresponse:0.0.4')
+//            {
 //        exclude group: 'com.google.dagger'
 //        exclude group: 'androidx.test.ext'
 //        exclude group: 'androidx.test.espresso'
@@ -48,5 +54,5 @@ dependencies {
 //        exclude group: 'androidx.core'
 //        exclude group: 'androidx.appcompat'
 //        exclude group: 'org.jetbrains.kotlin'
-    }
+//    }
 }

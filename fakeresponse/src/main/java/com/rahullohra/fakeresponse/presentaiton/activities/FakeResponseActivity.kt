@@ -8,7 +8,7 @@ import com.rahullohra.fakeresponse.R
 import com.rahullohra.fakeresponse.presentaiton.fragments.DownloadFragment
 import com.rahullohra.fakeresponse.presentaiton.fragments.FakeResponseFragment
 
-class FakeResponseActivity : AppCompatActivity() {
+class FakeResponseActivity : BaseActivity() {
 
     lateinit var fm: FrameLayout
     override fun onCreate(savedInstanceState: Bundle?) {

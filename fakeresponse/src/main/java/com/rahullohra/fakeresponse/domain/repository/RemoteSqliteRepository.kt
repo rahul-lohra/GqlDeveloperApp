@@ -1,9 +1,8 @@
 package com.rahullohra.fakeresponse.domain.repository
 
 import java.net.URL
-import javax.inject.Inject
 
-class RemoteSqliteRepository @Inject constructor() {
+class RemoteSqliteRepository : BaseRepository {
 
     init {
         prepareMap()

@@ -4,18 +4,15 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
-import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.rahullohra.fakeresponse.App
 import com.rahullohra.fakeresponse.R
-import com.rahullohra.fakeresponse.data.di.component.DaggerAddGqlActivityComponent
+import com.rahullohra.fakeresponse.data.diProvider.activities.AddGqlActivityProvider
 import com.rahullohra.fakeresponse.presentaiton.livedata.Fail
 import com.rahullohra.fakeresponse.presentaiton.livedata.Loading
 import com.rahullohra.fakeresponse.presentaiton.livedata.Success
 import com.rahullohra.fakeresponse.presentaiton.viewmodels.AddGqlVM
 import com.rahullohra.fakeresponse.presentaiton.viewmodels.data.AddGqlData
 import com.rahullohra.fakeresponse.toast
-import javax.inject.Inject
 
 class AddGqlActivity : BaseActivity() {
 
@@ -24,8 +21,6 @@ class AddGqlActivity : BaseActivity() {
     lateinit var etResponse: EditText
 
     override fun getLayout() = R.layout.activity_add_gql
-
-    @Inject
     lateinit var viewModel: AddGqlVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,24 +38,20 @@ class AddGqlActivity : BaseActivity() {
     }
 
     fun initVars() {
-        val app = (applicationContext as App)
-
-        val activityComponent = DaggerAddGqlActivityComponent.builder()
-            .appComponent(app.appComponent)
-            .build()
-        activityComponent.inject(this)
+        AddGqlActivityProvider().inject(this)
     }
 
-    fun setListeners(){
+    fun setListeners() {
         viewModel.liveData.observe(this, Observer {
-            when(it){
-                is Success<Long>->{
+            when (it) {
+                is Success<Long> -> {
                     toast("New entry added")
                 }
-                is Fail ->{
+                is Fail -> {
                     toast(it.ex.message)
                 }
-                is Loading->{}
+                is Loading -> {
+                }
             }
         })
     }
@@ -84,7 +75,8 @@ class AddGqlActivity : BaseActivity() {
         val gqlName = etGqlName.text.toString()
         val response = etResponse.text.toString()
 
-        val addGqlData = AddGqlData(gqlQueryName = gqlName, response = response, customTag = customName)
+        val addGqlData =
+            AddGqlData(gqlQueryName = gqlName, response = response, customTag = customName)
         viewModel.addToDb(addGqlData)
     }
 }

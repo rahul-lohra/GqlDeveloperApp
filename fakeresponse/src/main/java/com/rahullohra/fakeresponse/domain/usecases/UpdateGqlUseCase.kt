@@ -1,15 +1,14 @@
 package com.rahullohra.fakeresponse.domain.usecases
 
 import com.rahullohra.fakeresponse.domain.repository.LocalRepository
-import javax.inject.Inject
 
-class UpdateGqlUseCase @Inject constructor(val localRepository: LocalRepository) {
+class UpdateGqlUseCase constructor(val repository: LocalRepository) : BaseUseCase<LocalRepository>(repository)  {
 
     suspend fun toggleGql(gqlRecord: Int, enable: Boolean) {
-        localRepository.toggleGqlRecord(gqlRecord, enable)
+        repository.toggleGqlRecord(gqlRecord, enable)
     }
 
     suspend fun deleteAllRecords() {
-        localRepository.deleteAllRecords()
+        repository.deleteAllRecords()
     }
 }

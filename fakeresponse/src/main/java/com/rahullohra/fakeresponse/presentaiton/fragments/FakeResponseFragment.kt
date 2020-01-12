@@ -8,20 +8,16 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
-import com.rahullohra.fakeresponse.App
 import com.rahullohra.fakeresponse.R
 import com.rahullohra.fakeresponse.Router
-import com.rahullohra.fakeresponse.data.di.component.DaggerFakeResponseFragmentComponent
+import com.rahullohra.fakeresponse.data.diProvider.fragments.FakeResponseFragmentProvider
 import com.rahullohra.fakeresponse.presentaiton.activities.FakeResponseActivity
 import com.rahullohra.fakeresponse.presentaiton.adapters.PagerAdapter
 import com.rahullohra.fakeresponse.presentaiton.livedata.Success
 import com.rahullohra.fakeresponse.presentaiton.viewmodels.FakeResponseVM
-import com.rahullohra.fakeresponse.presentaiton.viewmodels.ViewModelFactory
-import javax.inject.Inject
 
 class FakeResponseFragment : BaseFragment() {
 
@@ -33,10 +29,8 @@ class FakeResponseFragment : BaseFragment() {
     lateinit var tabLayout: TabLayout
     lateinit var fab: FloatingActionButton
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
     private lateinit var pagerAdapter: PagerAdapter
-    var viewModel: FakeResponseVM? = null
+    lateinit var viewModel: FakeResponseVM
 
 
     override fun getLayout() = R.layout.fake_response_fragment
@@ -71,7 +65,7 @@ class FakeResponseFragment : BaseFragment() {
             Router.routeToAddGql(context)
         }
 
-        viewModel?.clearSqlRecords?.observe(viewLifecycleOwner, Observer {
+        viewModel.clearSqlRecords.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Success -> {
                     handleAllRecordsDeleted()
@@ -79,7 +73,7 @@ class FakeResponseFragment : BaseFragment() {
             }
         })
 
-        viewModel?.resetData?.observe(viewLifecycleOwner, Observer {
+        viewModel.resetData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Success -> {
                     handleResetData()
@@ -99,20 +93,18 @@ class FakeResponseFragment : BaseFragment() {
         }
     }
 
-    fun handleResetData(){
-        if(context is FakeResponseActivity){
-            Toast.makeText(context,"All data cleared, Restart app to use this library again",Toast.LENGTH_LONG).show()
+    fun handleResetData() {
+        if (context is FakeResponseActivity) {
+            Toast.makeText(
+                context,
+                "All data cleared, Restart app to use this library again",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
     fun inijectComponents() {
-        if (viewModel == null) {
-            val appComponent = (context?.applicationContext as App).appComponent
-            DaggerFakeResponseFragmentComponent.builder()
-                .appComponent(appComponent)
-                .build().inject(this)
-            viewModel = ViewModelProviders.of(this, viewModelFactory)[FakeResponseVM::class.java]
-        }
+        FakeResponseFragmentProvider().inject(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -123,10 +115,10 @@ class FakeResponseFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.gql_menu_clear_records -> {
-                viewModel?.deleteAllGqlRecords()
+                viewModel.deleteAllGqlRecords()
             }
             R.id.gql_menu_reset -> {
-                viewModel?.resetLibrary()
+                viewModel.resetLibrary()
             }
         }
         return true

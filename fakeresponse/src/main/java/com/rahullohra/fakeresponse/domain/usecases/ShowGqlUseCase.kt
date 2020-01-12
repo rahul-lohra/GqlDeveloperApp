@@ -2,16 +2,16 @@ package com.rahullohra.fakeresponse.domain.usecases
 
 import com.rahullohra.fakeresponse.ResponseListData
 import com.rahullohra.fakeresponse.domain.repository.LocalRepository
-import javax.inject.Inject
 
-class ShowGqlUseCase @Inject constructor(val localRepository: LocalRepository) {
+class ShowGqlUseCase constructor(val repository: LocalRepository) :
+    BaseUseCase<LocalRepository>(repository) {
 
     suspend fun getAllQueries(): List<ResponseListData> {
-        return localRepository.getAllGql()
+        return repository.getAllGql()
             .map { ResponseListData(it.id!!, it.gqlOperationName, it.enabled) }
     }
 
     suspend fun deleteAllRecords() {
-        localRepository.deleteAllRecords()
+        repository.deleteAllRecords()
     }
 }

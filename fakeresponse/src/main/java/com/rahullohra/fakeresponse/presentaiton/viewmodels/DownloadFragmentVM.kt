@@ -2,21 +2,16 @@ package com.rahullohra.fakeresponse.presentaiton.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rahullohra.fakeresponse.data.di.modules.DispatcherModule
 import com.rahullohra.fakeresponse.domain.usecases.DownloadSqliteUseCase
 import com.rahullohra.fakeresponse.presentaiton.livedata.Fail
 import com.rahullohra.fakeresponse.presentaiton.livedata.LiveDataResult
 import com.rahullohra.fakeresponse.presentaiton.livedata.Loading
 import com.rahullohra.fakeresponse.presentaiton.livedata.Success
 import kotlinx.coroutines.*
-import javax.inject.Inject
-import javax.inject.Named
 import kotlin.coroutines.CoroutineContext
 
-class DownloadFragmentVM @Inject constructor(
-    @Named(DispatcherModule.UI)
+class DownloadFragmentVM  constructor(
     val uiDispatcher: CoroutineDispatcher,
-    @Named(DispatcherModule.WORKER)
     val workerDispatcher: CoroutineDispatcher,
     val usecase: DownloadSqliteUseCase
 ) : ViewModel(), CoroutineScope {

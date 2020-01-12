@@ -1,7 +1,7 @@
 package com.rahullohra.gqldeveloperapp
 
-import com.rahullohra.fakeresponse.App
+import android.app.Application
 
-class MyApp :App(){
+class MyApp : Application() {
 
 }
