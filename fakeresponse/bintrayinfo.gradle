@@ -1,5 +1,6 @@
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'android-maven'
 
 ext {
 
@@ -11,7 +12,7 @@ ext {
     //Artifact information
     publishedGroupId = 'com.rahullohra.fakeresponse'
     artifact = 'fakeResponse'
-    libraryVersion = '0.0.1'
+    libraryVersion = '0.0.2'
 
     libraryDescription = 'An android library to provide fake api response'
     siteUrl = 'https://github.com/rahul-lohra/GqlDeveloperApp'
@@ -24,14 +25,30 @@ ext {
     allLicenses = ['Apache-2.0']
 
 }
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-if(project.rootProject.file('local.properties').exists()){
-    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+group = publishedGroupId
+version = libraryVersion
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    pkg {
+
+        repo = bintrayRepo
+        name = bintrayName
+        version {
+            name = libraryVersion
+            desc = libraryDescription
+            released  = new Date()
+            vcsTag = libraryVersion
+        }
+
+        licenses = allLicenses
+        vcsUrl = gitUrl
+        websiteUrl = siteUrl
+    }
+    configurations = ['archives']
 }
-
-//if (project.hasProperty('javadocFlag') && project.getProperty('javadocFlag')) {
-//    javadoc {
-//        failOnError = false
-//    }
-//}
