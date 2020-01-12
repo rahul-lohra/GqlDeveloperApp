@@ -1,2 +1,3 @@
-include ':app', ':fakeresponse'
+include ':app',
+        ':fakeresponse'
 rootProject.name='GqlDeveloperApp'
