@@ -4,6 +4,7 @@ object SupportedQueryName {
     val names: ArrayList<String> = arrayListOf()
 
     init {
-        names.add("tokopointsDrawer")
+//        names.add("tokopointsDrawer")
+        names.add("gamiFloating")
     }
 }
