@@ -5,19 +5,23 @@ import com.rahullohra.fakeresponse.db.entities.FakeGql
 
 class LocalRepository (val dao: GqlDao) :BaseRepository{
 
-    suspend fun addToDb(fakeGql: FakeGql): Long {
+    fun addToDb(fakeGql: FakeGql): Long {
         return dao.insertGql(fakeGql)
     }
 
-    suspend fun getAllGql(): List<FakeGql> {
+    fun getAllGql(): List<FakeGql> {
         return dao.getAll()
     }
 
-    suspend fun deleteAllRecords() {
+    fun deleteAllRecords() {
         return dao.deleteAll()
     }
 
-    suspend fun toggleGqlRecord(gqlRecord: Int, enable: Boolean) {
+    fun toggleGqlRecord(gqlRecord: Int, enable: Boolean) {
         return dao.toggleGql(gqlRecord, enable)
+    }
+
+    fun getGqlQueryResponse(gqlQuery:String, enable: Boolean) :FakeGql{
+        return dao.getRecordFromGqlQuery(gqlQuery, enable)
     }
 }
