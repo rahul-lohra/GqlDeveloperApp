@@ -18,7 +18,7 @@ class AddGqlActivity : BaseActivity() {
 
     lateinit var etGqlName: EditText
     lateinit var etCustomName: EditText
-    lateinit var etResponse: EditText
+    lateinit var etResponse: EditText 
 
     override fun getLayout() = R.layout.activity_add_gql
     lateinit var viewModel: AddGqlVM

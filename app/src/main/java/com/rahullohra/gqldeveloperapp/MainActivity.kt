@@ -1,9 +1,8 @@
 package com.rahullohra.gqldeveloperapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.rahullohra.fakeresponse.presentaiton.activities.FakeResponseActivity
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,10 +10,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        startActivity(Intent(this, FakeResponseActivity::class.java))
-        finish()
+        startActivity(getFakeIntent())
+//        finish()
 
         RvAdapter()
         RoundTextView(this)
+    }
+
+    fun getFakeIntent(): Intent {
+        val actionName = BuildConfig.APPLICATION_ID + ".fakeresponse.gqlTesting"
+        return Intent(actionName).addCategory(Intent.CATEGORY_DEFAULT)
     }
 }

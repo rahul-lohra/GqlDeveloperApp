@@ -8,7 +8,14 @@
         <activity android:name="com.rahullohra.fakeresponse.presentaiton.activities.AddGqlActivity"
             android:theme="@style/FakeNoActionBar" />
         <activity android:name="com.rahullohra.fakeresponse.presentaiton.activities.FakeResponseActivity"
-            android:theme="@style/FakeNoActionBar" />
+            android:theme="@style/FakeNoActionBar"
+            android:taskAffinity="fakeresponse.gqlTesting"
+            android:launchMode="singleTask">
+            <intent-filter >
+                <action android:name="${applicationId}.fakeresponse.gqlTesting" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

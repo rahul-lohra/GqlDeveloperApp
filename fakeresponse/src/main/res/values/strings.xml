@@ -3,4 +3,5 @@
     <string name="gql_save">Save</string>
     <string name="gql_reset">Reset</string>
     <string name="gql_clear_records">Clear records</string>
+    <string name="rahullohra_gql_testing" translatable="false">rahullohra_gql_testing</string>
 </resources>
