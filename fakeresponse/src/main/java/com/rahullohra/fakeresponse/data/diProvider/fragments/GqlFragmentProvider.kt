@@ -7,13 +7,13 @@ import com.rahullohra.fakeresponse.domain.repository.LocalRepository
 import com.rahullohra.fakeresponse.domain.repository.RestRepository
 import com.rahullohra.fakeresponse.domain.usecases.ShowRecordsUseCase
 import com.rahullohra.fakeresponse.domain.usecases.UpdateGqlUseCase
-import com.rahullohra.fakeresponse.presentaiton.fragments.GqlFragment
+import com.rahullohra.fakeresponse.presentaiton.fragments.HomeFragment
 import com.rahullohra.fakeresponse.presentaiton.viewmodels.FakeResponseModel
 import kotlinx.coroutines.Dispatchers
 
-class GqlFragmentProvider : DiProvider<GqlFragment> {
+class GqlFragmentProvider : DiProvider<HomeFragment> {
 
-    override fun inject(t: GqlFragment) {
+    override fun inject(t: HomeFragment) {
         t.activity?.let { activity ->
             val workerDispatcher = Dispatchers.IO
 

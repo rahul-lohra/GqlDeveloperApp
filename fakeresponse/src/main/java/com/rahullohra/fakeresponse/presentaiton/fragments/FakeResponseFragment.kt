@@ -82,7 +82,7 @@ class FakeResponseFragment : BaseFragment() {
     fun handleAllRecordsDeleted() {
         if (context is FakeResponseActivity) {
             pagerAdapter.fragmentList.forEach {
-                if (it is GqlFragment) {
+                if (it is HomeFragment) {
                     it.showEmptyUi()
                 }
             }

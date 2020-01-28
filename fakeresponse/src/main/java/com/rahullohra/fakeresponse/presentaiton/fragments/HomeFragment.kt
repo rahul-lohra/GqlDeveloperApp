@@ -18,13 +18,13 @@ import com.rahullohra.fakeresponse.presentaiton.livedata.Success
 import com.rahullohra.fakeresponse.presentaiton.viewmodels.FakeResponseModel
 
 
-class GqlFragment : BaseFragment() {
+class HomeFragment : BaseFragment() {
     val STATE_EMPTY = 0
     val STATE_DATA = 1
 
     companion object {
-        fun newInstance(): GqlFragment {
-            return GqlFragment()
+        fun newInstance(): HomeFragment {
+            return HomeFragment()
         }
     }
 

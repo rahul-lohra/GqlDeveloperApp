@@ -2,7 +2,6 @@ package com.rahullohra.fakeresponse.presentaiton.activities
 
 import android.os.Bundle
 import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.rahullohra.fakeresponse.R
 import com.rahullohra.fakeresponse.presentaiton.fragments.DownloadFragment
