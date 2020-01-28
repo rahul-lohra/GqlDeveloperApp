@@ -1,4 +1,4 @@
-package com.rahullohra.fakeresponse.data.parsers
+package com.rahullohra.fakeresponse.data.parsers.factory
 
 import com.rahullohra.fakeresponse.data.parsers.rules.GqlParserRule
 import com.rahullohra.fakeresponse.data.parsers.rules.MapQueryParserRule

@@ -1,4 +1,4 @@
-package com.rahullohra.fakeresponse.data.parsers
+package com.rahullohra.fakeresponse.data.parsers.usecase
 
 import com.rahullohra.fakeresponse.domain.repository.LocalRepository
 

@@ -41,8 +41,8 @@ class GqlFragment : BaseFragment() {
 
     override fun initVars() {
         dataList = ArrayList()
-        adapter = GqlRvAdapter(dataList, itemClickCallback = { gqlId, isChecked ->
-            viewModel.toggleGql(gqlId, isChecked)
+        adapter = GqlRvAdapter(dataList, itemClickCallback = { data, isChecked ->
+            viewModel.toggleGql(data, isChecked)
         })
     }
 
