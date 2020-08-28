@@ -8,4 +8,4 @@ data class ResponseListData(
     val responseType:ResponseItemType
 )
 
-enum class ResponseItemType { GQL, REST }
+enum class ResponseItemType { GQL, REST } 
