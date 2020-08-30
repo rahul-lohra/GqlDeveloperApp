@@ -1,3 +1,4 @@
 include ':app',
-        ':fakeresponse'
+        ':fakeresponse',
+        ':module2'
 rootProject.name='GqlDeveloperApp'
