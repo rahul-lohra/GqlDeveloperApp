@@ -6,6 +6,7 @@ emulator_path="/home/rahulkumarlohra-xps/AndroidStudioProjects/GqlDeveloperApp/a
 AVD_MANAGER="$ANDROID_HOME/tools/bin/avdmanager"
 echo "no" | $AVD_MANAGER --verbose create avd --force --name $emulator_name --device "pixel" --package "system-images;android-29;google_apis;x86" --tag "google_apis" --abi "x86" -p $emulator_path
 
+
 #Start the emulator
 $ANDROID_HOME/emulator/emulator -avd $emulator_name -netdelay none -netspeed full -wipe-data & EMULATOR_PID=$!
 
@@ -20,12 +21,13 @@ done
 $ANDROID_HOME/platform-tools/adb shell input keyevent 82
 
 # Clear and capture logcat
-$ANDROID_HOME/platform-tools/adb logcat -pid=$EMULATOR_PID -c
-$ANDROID_HOME/platform-tools/adb logcat -pid=$EMULATOR_PID > build/logcat.log &
+$ANDROID_HOME/platform-tools/adb logcat  -c
+$ANDROID_HOME/platform-tools/adb logcat  > build/logcat_fakeresponse.log &
 LOGCAT_PID=$!
 
 # Run the tests
-./gradlew connectedAndroidTest -i
+#./gradlew connectedAndroidTest -i
+./gradlew :fakeresponse:connectedDebugAndroidTest
 
 # Stop the background processes
 kill $LOGCAT_PID

@@ -21,11 +21,12 @@ $ANDROID_HOME/platform-tools/adb shell input keyevent 82
 
 # Clear and capture logcat
 $ANDROID_HOME/platform-tools/adb logcat -pid=$EMULATOR_PID -c
-$ANDROID_HOME/platform-tools/adb logcat -pid=$EMULATOR_PID > build/logcat.log &
+$ANDROID_HOME/platform-tools/adb logcat -pid=$EMULATOR_PID > build/logcat_module2.log &
 LOGCAT_PID=$!
 
 # Run the tests
-./gradlew connectedAndroidTest -i
+#./gradlew connectedAndroidTest -i
+./gradlew module2:connectedDebugAndroidTest
 
 # Stop the background processes
 kill $LOGCAT_PID

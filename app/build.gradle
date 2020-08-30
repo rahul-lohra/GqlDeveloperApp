@@ -39,6 +39,7 @@ dependencies {
 
         implementation project(path: ':fakeresponse')
         implementation project(path: ':module2')
+        implementation project(path: ':features:promo')
 //    implementation ('com.rahullohra.fakeresponse:fakeresponse:0.0.4@aar'){
 //        transitive = true
 //    }
