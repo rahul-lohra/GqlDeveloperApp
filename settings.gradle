@@ -1,3 +1,7 @@
 include ':app',
-        ':fakeresponse'
+        ':fakeresponse',
+        ':module2',
+        ':testapp',
+        ':features:promo',
+        ':features:promo_no_android_test'
 rootProject.name='GqlDeveloperApp'

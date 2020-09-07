@@ -12,3 +12,6 @@
 /captures
 .externalNativeBuild
 .cxx
+/avds/test_device/
+/features/promo/build/
+/features/promo_no_android_test/build/
